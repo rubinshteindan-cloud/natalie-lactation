@@ -241,6 +241,51 @@ h1 span {
   color: var(--accent-dark);
 }
 
+.floating-social {
+  position: fixed;
+  left: max(18px, env(safe-area-inset-left));
+  bottom: max(26px, env(safe-area-inset-bottom));
+  z-index: 30;
+  display: grid;
+  gap: 12px;
+}
+
+.floating-social-link {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  box-shadow: 0 16px 34px rgba(52, 35, 45, 0.22);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.floating-social-link:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(52, 35, 45, 0.26);
+}
+
+.floating-social-link svg {
+  width: 30px;
+  height: 30px;
+  display: block;
+  fill: currentColor;
+}
+
+.floating-social-link.whatsapp {
+  background: linear-gradient(135deg, #2fc56f, #159a52);
+}
+
+.floating-social-link.instagram {
+  background:
+    radial-gradient(circle at 28% 105%, #feda75 0 22%, transparent 23%),
+    radial-gradient(circle at 12% 90%, #fa7e1e 0 28%, transparent 29%),
+    linear-gradient(135deg, #833ab4, #c13584 46%, #e1306c 68%, #fd1d1d);
+}
+
 .quick-facts {
   margin: 42px 0 0;
   display: grid;
@@ -689,6 +734,22 @@ footer a {
   .button {
     width: 100%;
     white-space: normal;
+  }
+
+  .floating-social {
+    left: 14px;
+    bottom: 18px;
+    gap: 10px;
+  }
+
+  .floating-social-link {
+    width: 52px;
+    height: 52px;
+  }
+
+  .floating-social-link svg {
+    width: 27px;
+    height: 27px;
   }
 }
 
