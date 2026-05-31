@@ -14,7 +14,6 @@
   --radius: 8px;
   --container: min(1120px, calc(100% - 40px));
   font-family:
-    "Gveret Levin",
     "Varela Round",
     "Segoe UI",
     Arial,
@@ -171,7 +170,7 @@ p {
 
 h1 {
   margin-bottom: 22px;
-  font-family: "Gveret Levin", "Varela Round", "Segoe UI", Arial, sans-serif;
+  font-family: "Varela Round", "Segoe UI", Arial, sans-serif;
   font-size: clamp(3.5rem, 6.5vw, 5.65rem);
   line-height: 1.02;
   letter-spacing: 0;
