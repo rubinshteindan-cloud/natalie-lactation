@@ -196,33 +196,12 @@
       </section>
 
       <section class="section testimonials" aria-label="המלצות">
-        <div class="quote">
-          <p>
+        <div class="quote rotating-testimonial" aria-live="polite">
+          <p id="testimonial-text">
             “נטלי נכנסה אלינו הביתה עם המון שקט. תוך כמה דקות היא ראתה מה
             מפריע לחיבור, כיוונה בעדינות, ופתאום ההנקה הרגישה אפשרית.”
           </p>
-          <span>מאיה ר׳, ראשון לציון</span>
-        </div>
-        <div class="quote">
-          <p>
-            “הגעתי אליה אחרי שבוע כמעט בלי שינה ועם הרבה דמעות. יצאתי עם
-            תוכנית ברורה, ביטחון, ובעיקר תחושה שמישהי באמת רואה אותי.”
-          </p>
-          <span>שירה-לי, אמא בפעם הראשונה</span>
-        </div>
-        <div class="quote">
-          <p>
-            “אהבתי שהיא לא דחפה פתרון אחד. היא הקשיבה לתינוק, אליי ולבית שלנו,
-            ובנתה איתי דרך שהצלחתי להמשיך גם לבד.”
-          </p>
-          <span>נועה קדם, אחרי קיסרי</span>
-        </div>
-        <div class="quote">
-          <p>
-            “בפגישה אחת הבנתי דברים שלא הבנתי שבועיים. נטלי הייתה מקצועית,
-            רגישה, ומדויקת בדיוק במקום שבו הייתי צריכה עזרה.”
-          </p>
-          <span>תמרי מ׳, ליווי חזרה להנקה</span>
+          <span id="testimonial-author">אמא מראשון לציון</span>
         </div>
       </section>
 
@@ -282,6 +261,37 @@
       </a>
     </div>
     <script>
+      const testimonials = [
+        {
+          text: "“נטלי נכנסה אלינו הביתה עם המון שקט. תוך כמה דקות היא ראתה מה מפריע לחיבור, כיוונה בעדינות, ופתאום ההנקה הרגישה אפשרית.”",
+          author: "אמא מראשון לציון"
+        },
+        {
+          text: "“הגעתי אחרי שבוע כמעט בלי שינה ועם הרבה דמעות. יצאתי עם תוכנית ברורה, ביטחון, ובעיקר תחושה שמישהי באמת רואה אותי.”",
+          author: "אמא בפעם הראשונה"
+        },
+        {
+          text: "“אהבתי שהיא לא דחפה פתרון אחד. היא הקשיבה לתינוק, אליי ולבית שלנו, ובנתה איתי דרך שהצלחתי להמשיך גם לבד.”",
+          author: "אמא אחרי קיסרי"
+        },
+        {
+          text: "“בפגישה אחת הבנתי דברים שלא הבנתי שבועיים. נטלי הייתה מקצועית, רגישה ומדויקת בדיוק במקום שבו הייתי צריכה עזרה.”",
+          author: "אמא שחזרה להנקה"
+        },
+        {
+          text: "“הכי עזר לי שהיא הסבירה בפשטות ולא הלחיצה. פתאום ידעתי מה לבדוק בכל הנקה ומה לעשות כשהתינוק מתעייף.”",
+          author: "אמא לתינוק בן שבועיים"
+        },
+        {
+          text: "“הרגשתי שיש מקום גם לקושי שלי וגם לצורך של התינוק. נטלי נתנה לי כלים קטנים שעשו שינוי גדול כבר באותו ערב.”",
+          author: "אמא לשלושה"
+        },
+        {
+          text: "“הייתי בטוחה שאצטרך לוותר. אחרי הליווי הבנתי איפה היה הקושי, והצלחתי לחזור להניק בצורה רגועה יותר.”",
+          author: "אמא אחרי התחלה מאתגרת"
+        }
+      ];
+
       const breastfeedingFacts = [
         "הקולוסטרום הוא החלב הראשון, עשיר ברכיבים חיסוניים ומחכה לתינוק כבר אחרי הלידה.",
         "כבר בימים הראשונים התינוק מקבל דרך הקולוסטרום תמיכה חשובה למערכת החיסון.",
@@ -315,6 +325,21 @@
 
         showFact();
         setInterval(showFact, 30000);
+      }
+
+      const testimonialText = document.getElementById("testimonial-text");
+      const testimonialAuthor = document.getElementById("testimonial-author");
+      if (testimonialText && testimonialAuthor) {
+        let testimonialIndex = Math.floor(Math.random() * testimonials.length);
+        const showTestimonial = () => {
+          const testimonial = testimonials[testimonialIndex];
+          testimonialText.textContent = testimonial.text;
+          testimonialAuthor.textContent = testimonial.author;
+          testimonialIndex = (testimonialIndex + 1) % testimonials.length;
+        };
+
+        showTestimonial();
+        setInterval(showTestimonial, 20000);
       }
     </script>
   </body>

@@ -614,14 +614,21 @@ h1 span {
 }
 
 .testimonials {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  display: block;
   padding-top: 28px;
 }
 
 .quote {
   padding: 30px;
+}
+
+.rotating-testimonial {
+  max-width: 760px;
+  min-height: 210px;
+  margin-inline: auto;
+  display: grid;
+  align-content: center;
+  text-align: center;
 }
 
 .quote p {
@@ -695,7 +702,6 @@ footer a {
   .hero,
   .intro,
   .split,
-  .testimonials,
   .contact {
     grid-template-columns: 1fr;
   }
@@ -865,6 +871,15 @@ footer a {
 
   .rotating-fact p {
     font-size: 1rem;
+  }
+
+  .rotating-testimonial {
+    min-height: 250px;
+    padding: 26px 22px;
+  }
+
+  .quote p {
+    font-size: 1.03rem;
   }
 
   .floating-social {
