@@ -179,11 +179,15 @@ a {
   padding: 34px 0 64px;
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.92fr);
+  grid-template-areas:
+    "copy visual"
+    "copy calculator";
   align-items: center;
   gap: clamp(38px, 6vw, 86px);
 }
 
 .hero-copy {
+  grid-area: copy;
   max-width: 640px;
 }
 
@@ -414,8 +418,9 @@ h1 span {
 }
 
 .hero-visual {
+  grid-area: visual;
   position: relative;
-  min-height: 520px;
+  min-height: 390px;
   display: grid;
   place-items: center;
   align-content: center;
@@ -478,6 +483,7 @@ h1 span {
 }
 
 .feeding-calculator {
+  grid-area: calculator;
   position: relative;
   z-index: 2;
   width: min(390px, 92%);
@@ -790,6 +796,14 @@ footer a {
     min-height: auto;
     padding: 34px 0 58px;
     overflow: visible;
+    grid-template-areas:
+      "visual"
+      "copy"
+      "calculator";
+  }
+
+  .hero-copy {
+    grid-area: copy;
   }
 
   h1 {
@@ -839,8 +853,8 @@ footer a {
   }
 
   .hero-visual {
-    min-height: 650px;
-    order: -1;
+    min-height: 420px;
+    grid-area: visual;
     overflow: visible;
   }
 
@@ -917,7 +931,7 @@ footer a {
   }
 
   .hero-visual {
-    min-height: 620px;
+    min-height: 390px;
   }
 
   .portrait-frame {
@@ -999,6 +1013,10 @@ footer a {
 
   .hero {
     justify-items: center;
+    grid-template-areas:
+      "visual"
+      "copy"
+      "calculator";
   }
 
   .hero-visual {

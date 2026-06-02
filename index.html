@@ -110,47 +110,46 @@
               <small>כאן תיכנס התמונה</small>
             </div>
           </div>
-          <aside class="feeding-calculator" aria-label="מחשבון הנקה לפי גיל">
-            <div class="feeding-calculator-head">
-              <span>מחשבון הנקה</span>
-            </div>
-            <label for="baby-age">גיל התינוק</label>
-            <select id="baby-age">
-              <option value="day1">יממה ראשונה</option>
-              <option value="day2">יממה שנייה</option>
-              <option value="day3">יממה שלישית</option>
-              <option value="day4">יממה רביעית</option>
-              <option value="day5">יממה חמישית</option>
-              <option value="day6">יממה שישית</option>
-              <option value="week2">שבוע 1-2</option>
-              <option value="month1">סביב גיל חודש</option>
-              <option value="months1to3">חודש עד 3 חודשים</option>
-              <option value="months3to6">3 עד 6 חודשים</option>
-              <option value="months6plus">חצי שנה ומעלה</option>
-            </select>
-            <label for="baby-weight">משקל נוכחי בק״ג (אופציונלי)</label>
-            <input id="baby-weight" type="number" min="1.5" max="12" step="0.1" inputmode="decimal" placeholder="לדוגמה 3.4" />
-            <div class="feeding-result" aria-live="polite">
-              <div>
-                <span>כמות לארוחה</span>
-                <strong id="feeding-amount">5-10 מ״ל</strong>
-              </div>
-              <div>
-                <span>קצב ביום</span>
-                <strong id="feeding-frequency">8-12 הנקות</strong>
-              </div>
-              <div>
-                <span>קצב עלייה במשקל</span>
-                <strong id="feeding-gain">מעקב לפי טיפת חלב</strong>
-              </div>
-              <p id="feeding-note">
-                ביממה הראשונה הקיבה קטנה, והקולוסטרום מותאם בדיוק לכמויות קטנות ותכופות.
-              </p>
-              <p id="feeding-weight-note"></p>
-            </div>
-            <small>הערכה כללית לתינוק בריא; במקרה של כאב, ירידה במשקל או חשש - כדאי להתייעץ.</small>
-          </aside>
         </div>
+        <aside class="feeding-calculator" aria-label="מחשבון הנקה לפי גיל">
+          <div class="feeding-calculator-head">
+            <span>מחשבון הנקה</span>
+          </div>
+          <label for="baby-age">גיל התינוק</label>
+          <select id="baby-age" autocomplete="off">
+            <option value="day1">יממה ראשונה</option>
+            <option value="day2">יממה שנייה</option>
+            <option value="day3">יממה שלישית</option>
+            <option value="day4">יממה רביעית</option>
+            <option value="day5">יממה חמישית</option>
+            <option value="day6">יממה שישית</option>
+            <option value="week2toMonth">שבועיים עד חודש</option>
+            <option value="months1to3">חודש עד 3 חודשים</option>
+            <option value="month4">סביב גיל 4 חודשים</option>
+            <option value="months6plus">סביב גיל 6 חודשים ומעלה</option>
+          </select>
+          <label for="baby-weight">משקל נוכחי בק״ג (אופציונלי)</label>
+          <input id="baby-weight" type="number" min="1.5" max="12" step="0.1" inputmode="decimal" placeholder="לדוגמה 3.4" />
+          <div class="feeding-result" aria-live="polite">
+            <div>
+              <span>כמות לארוחה</span>
+              <strong id="feeding-amount">5-10 מ״ל</strong>
+            </div>
+            <div>
+              <span>קצב ביום</span>
+              <strong id="feeding-frequency">8-12 הנקות</strong>
+            </div>
+            <div>
+              <span>קצב עלייה במשקל</span>
+              <strong id="feeding-gain">מעקב לפי טיפת חלב</strong>
+            </div>
+            <p id="feeding-note">
+              ביממה הראשונה הקיבה קטנה, והקולוסטרום מותאם בדיוק לכמויות קטנות ותכופות.
+            </p>
+            <p id="feeding-weight-note"></p>
+          </div>
+          <small>הערכה כללית לתינוק בריא; במקרה של כאב, ירידה במשקל או חשש - כדאי להתייעץ.</small>
+        </aside>
       </section>
 
       <section class="section intro">
@@ -359,80 +358,72 @@
 
       const feedingGuide = {
         day1: {
-          amount: "5-10 מ״ל",
-          frequency: "8-12 הנקות",
+          amount: "5-10 מ״ל כל 3 שעות",
+          frequency: "מינימום 8 הנקות",
           note: "ביממה הראשונה הקיבה קטנה, והקולוסטרום מותאם בדיוק לכמויות קטנות ותכופות.",
-          gain: "מעקב לפי טיפת חלב",
+          gain: "חזרה למשקל לידה עד גיל שבועיים",
           weightRelevant: false
         },
         day2: {
-          amount: "10-20 מ״ל",
-          frequency: "8-12 הנקות",
+          amount: "10-20 מ״ל כל 3 שעות",
+          frequency: "מינימום 8 הנקות",
           note: "ביממה השנייה הכמות לרוב עולה בהדרגה, ועדיין חשוב להציע הנקה בתדירות גבוהה.",
-          gain: "מעקב לפי טיפת חלב",
+          gain: "חזרה למשקל לידה עד גיל שבועיים",
           weightRelevant: false
         },
         day3: {
-          amount: "כ-30 מ״ל",
-          frequency: "לפחות 8 הנקות",
+          amount: "כ-30 מ״ל כל 3 שעות",
+          frequency: "מינימום 8 הנקות",
           note: "סביב היממה השלישית החלב מתחיל להשתנות, והכמויות מתחילות לעלות.",
-          gain: "מתחילים לעקוב אחרי מגמה",
+          gain: "חזרה למשקל לידה עד גיל שבועיים",
           weightRelevant: false
         },
         day4: {
-          amount: "כ-40 מ״ל",
-          frequency: "לפחות 8 הנקות",
+          amount: "כ-40 מ״ל כל 3 שעות",
+          frequency: "מינימום 8 הנקות",
           note: "עדיין מצפים להנקות תכופות; תינוק שמבקש יותר מקבל יותר לפי הצורך.",
-          gain: "מתחילים לעקוב אחרי מגמה",
+          gain: "חזרה למשקל לידה עד גיל שבועיים",
           weightRelevant: false
         },
         day5: {
-          amount: "כ-50 מ״ל",
-          frequency: "לפחות 8 הנקות",
+          amount: "כ-50 מ״ל כל 3 שעות",
+          frequency: "מינימום 8 הנקות",
           note: "בשלב הזה חשוב לעקוב אחרי ערנות, חיתולים ועלייה הדרגתית בכמויות.",
-          gain: "עלייה הדרגתית",
+          gain: "חזרה למשקל לידה עד גיל שבועיים",
           weightRelevant: false
         },
         day6: {
-          amount: "כ-60 מ״ל",
-          frequency: "לפחות 8 הנקות",
-          note: "מהיממה השישית הכמות לארוחה בדרך כלל כבר משמעותית יותר, ועדיין יש שונות בין תינוקות.",
-          gain: "עלייה הדרגתית",
-          weightRelevant: true
+          amount: "כ-60 מ״ל כל 3 שעות",
+          frequency: "מינימום 8 הנקות",
+          note: "מהיממה השביעית משקל התינוק כבר רלוונטי יותר להערכת צריכת החלב היומית.",
+          gain: "חזרה למשקל לידה עד גיל שבועיים",
+          weightRelevant: false
         },
-        week2: {
-          amount: "60-80 מ״ל",
+        week2toMonth: {
+          amount: "60-80 מ״ל בכל האכלה",
           frequency: "8 פעמים ומעלה",
-          note: "בשבועות הראשונים הכמויות גדלות, אבל סימני רעב ושובע חשובים לא פחות מהמספר.",
-          gain: "מעקב שקילה תקופתי",
-          weightRelevant: true
-        },
-        month1: {
-          amount: "90-120 מ״ל",
-          frequency: "6-8 פעמים",
-          note: "סביב גיל חודש, אם התינוק עולה היטב במשקל ונראה חיוני, הטווחים יכולים להשתנות מעט.",
-          gain: "מעקב שקילה תקופתי",
+          note: "מהיממה השביעית ועד גיל חודש אפשר להשתמש בכלל אצבע של כ-150 מ״ל לק״ג ביממה, לצד מעקב אחרי תינוק חיוני, חיתולים וסימני שובע.",
+          gain: "כ-155-240 גרם בשבוע",
           weightRelevant: true
         },
         months1to3: {
           amount: "90-120 מ״ל",
           frequency: "6 פעמים ומעלה",
-          note: "גם אם התינוק אוכל פחות מהטווח, כל עוד יש עלייה טובה במשקל זה יכול להיות תקין. בגיל 3 חודשים מצפים לרוב לעלייה של כ-150-200 גרם בשבוע.",
+          note: "גם אם התינוק אוכל פחות מהטווח, כל עוד יש עלייה טובה במשקל זה יכול להיות תקין. בחלב אם הכמות לא תמיד עולה משמעותית כמו בפורמולה, כי הרכב החלב משתנה ומתאים את עצמו.",
           gain: "כ-150-200 גרם בשבוע",
-          weightRelevant: true,
-          weeklyGain: "כ-150-200 גרם בשבוע"
+          weightRelevant: false
         },
-        months3to6: {
+        month4: {
           amount: "90-120 מ״ל",
           frequency: "6 פעמים ומעלה",
-          note: "בגיל הזה תיתכן יותר הסחת דעת וקיצור הנקות; עלייה במשקל והתנהגות התינוק הן המדדים החשובים.",
-          gain: "מעקב לפי עקומת גדילה",
+          note: "סביב גיל 4 חודשים אין בהכרח שינוי משמעותי בכמות, אבל תיתכן יותר ערנות, הסחות דעת, קושי בהרדמות והתעוררויות בלילה.",
+          gain: "מינימום כ-92 גרם בשבוע",
           weightRelevant: false
         },
         months6plus: {
           amount: "משתנה",
           frequency: "לפי הנקה ומוצקים",
-          note: "עם התחלת מוצקים הכמויות משתנות, אבל חלב אם נשאר מרכיב משמעותי בתזונה לפחות עד גיל שנה.",
+          note: "בגיל 6 חודשים רוב התינוקות מתחילים מזון מוצק כמזון משלים בנוסף לחלב אם או תמ״ל. ההנקה עדיין חלק חשוב מהתזונה.",
           gain: "מעקב לפי עקומת גדילה",
           weightRelevant: false
         }
@@ -470,10 +461,9 @@
         const weight = babyWeight ? Number(babyWeight.value) : 0;
         if (weight > 0 && guide.weightRelevant) {
           const dailyAmount = Math.round(weight * 150);
-          const gainText = guide.weeklyGain ? ` קצב עלייה רצוי: ${guide.weeklyGain}.` : "";
-          feedingWeightNote.textContent = `לפי כלל אצבע של כ-150 מ״ל לק״ג ביממה: בערך ${dailyAmount} מ״ל ביממה.${gainText}`;
+          feedingWeightNote.textContent = `לפי כלל אצבע עד גיל חודש: כ-150 מ״ל לק״ג ביממה, כלומר בערך ${dailyAmount} מ״ל ביממה.`;
         } else if (weight > 0) {
-          feedingWeightNote.textContent = "בגיל הזה המשקל פחות מתאים לחישוב כמות מדויקת; עדיף להסתכל על עלייה במשקל, חיוניות וסימני שובע.";
+          feedingWeightNote.textContent = "בגיל הזה המשקל חשוב למעקב גדילה, אבל פחות מתאים לחישוב כמות מדויקת. עדיף להסתכל על עלייה במשקל, חיוניות וסימני רעב ושובע.";
         } else {
           feedingWeightNote.textContent = "";
         }
