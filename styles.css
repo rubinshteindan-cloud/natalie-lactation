@@ -32,8 +32,12 @@ html {
 body {
   margin: 0;
   background:
+    radial-gradient(circle at 1px 1px, rgba(116, 45, 74, 0.045) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 9px 7px, rgba(224, 91, 117, 0.032) 0 1.2px, transparent 2px),
+    radial-gradient(circle at 14px 16px, rgba(79, 154, 131, 0.024) 0 0.9px, transparent 1.8px),
     linear-gradient(135deg, rgba(255, 236, 244, 0.95), rgba(247, 252, 246, 0.9) 45%, rgba(236, 247, 255, 0.88)),
     linear-gradient(180deg, #fff7fb 0%, #ffffff 46%, #fff0f5 100%);
+  background-size: 18px 18px, 28px 28px, 34px 34px, auto, auto;
   color: var(--text);
   line-height: 1.65;
   max-width: 100%;
