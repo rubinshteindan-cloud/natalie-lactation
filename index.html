@@ -139,6 +139,10 @@
                 <span>קצב ביום</span>
                 <strong id="feeding-frequency">8-12 הנקות</strong>
               </div>
+              <div>
+                <span>קצב עלייה במשקל</span>
+                <strong id="feeding-gain">מעקב לפי טיפת חלב</strong>
+              </div>
               <p id="feeding-note">
                 ביממה הראשונה הקיבה קטנה, והקולוסטרום מותאם בדיוק לכמויות קטנות ותכופות.
               </p>
@@ -358,54 +362,63 @@
           amount: "5-10 מ״ל",
           frequency: "8-12 הנקות",
           note: "ביממה הראשונה הקיבה קטנה, והקולוסטרום מותאם בדיוק לכמויות קטנות ותכופות.",
+          gain: "מעקב לפי טיפת חלב",
           weightRelevant: false
         },
         day2: {
           amount: "10-20 מ״ל",
           frequency: "8-12 הנקות",
           note: "ביממה השנייה הכמות לרוב עולה בהדרגה, ועדיין חשוב להציע הנקה בתדירות גבוהה.",
+          gain: "מעקב לפי טיפת חלב",
           weightRelevant: false
         },
         day3: {
           amount: "כ-30 מ״ל",
           frequency: "לפחות 8 הנקות",
           note: "סביב היממה השלישית החלב מתחיל להשתנות, והכמויות מתחילות לעלות.",
+          gain: "מתחילים לעקוב אחרי מגמה",
           weightRelevant: false
         },
         day4: {
           amount: "כ-40 מ״ל",
           frequency: "לפחות 8 הנקות",
           note: "עדיין מצפים להנקות תכופות; תינוק שמבקש יותר מקבל יותר לפי הצורך.",
+          gain: "מתחילים לעקוב אחרי מגמה",
           weightRelevant: false
         },
         day5: {
           amount: "כ-50 מ״ל",
           frequency: "לפחות 8 הנקות",
           note: "בשלב הזה חשוב לעקוב אחרי ערנות, חיתולים ועלייה הדרגתית בכמויות.",
+          gain: "עלייה הדרגתית",
           weightRelevant: false
         },
         day6: {
           amount: "כ-60 מ״ל",
           frequency: "לפחות 8 הנקות",
           note: "מהיממה השישית הכמות לארוחה בדרך כלל כבר משמעותית יותר, ועדיין יש שונות בין תינוקות.",
+          gain: "עלייה הדרגתית",
           weightRelevant: true
         },
         week2: {
           amount: "60-80 מ״ל",
           frequency: "8 פעמים ומעלה",
           note: "בשבועות הראשונים הכמויות גדלות, אבל סימני רעב ושובע חשובים לא פחות מהמספר.",
+          gain: "מעקב שקילה תקופתי",
           weightRelevant: true
         },
         month1: {
           amount: "90-120 מ״ל",
           frequency: "6-8 פעמים",
           note: "סביב גיל חודש, אם התינוק עולה היטב במשקל ונראה חיוני, הטווחים יכולים להשתנות מעט.",
+          gain: "מעקב שקילה תקופתי",
           weightRelevant: true
         },
         months1to3: {
           amount: "90-120 מ״ל",
           frequency: "6 פעמים ומעלה",
           note: "גם אם התינוק אוכל פחות מהטווח, כל עוד יש עלייה טובה במשקל זה יכול להיות תקין. בגיל 3 חודשים מצפים לרוב לעלייה של כ-150-200 גרם בשבוע.",
+          gain: "כ-150-200 גרם בשבוע",
           weightRelevant: true,
           weeklyGain: "כ-150-200 גרם בשבוע"
         },
@@ -413,12 +426,14 @@
           amount: "90-120 מ״ל",
           frequency: "6 פעמים ומעלה",
           note: "בגיל הזה תיתכן יותר הסחת דעת וקיצור הנקות; עלייה במשקל והתנהגות התינוק הן המדדים החשובים.",
+          gain: "מעקב לפי עקומת גדילה",
           weightRelevant: false
         },
         months6plus: {
           amount: "משתנה",
           frequency: "לפי הנקה ומוצקים",
           note: "עם התחלת מוצקים הכמויות משתנות, אבל חלב אם נשאר מרכיב משמעותי בתזונה לפחות עד גיל שנה.",
+          gain: "מעקב לפי עקומת גדילה",
           weightRelevant: false
         }
       };
@@ -439,15 +454,17 @@
       const babyWeight = document.getElementById("baby-weight");
       const feedingAmount = document.getElementById("feeding-amount");
       const feedingFrequency = document.getElementById("feeding-frequency");
+      const feedingGain = document.getElementById("feeding-gain");
       const feedingNote = document.getElementById("feeding-note");
       const feedingWeightNote = document.getElementById("feeding-weight-note");
 
       const updateFeedingGuide = () => {
-        if (!babyAge || !feedingAmount || !feedingFrequency || !feedingNote || !feedingWeightNote) return;
+        if (!babyAge || !feedingAmount || !feedingFrequency || !feedingGain || !feedingNote || !feedingWeightNote) return;
 
         const guide = feedingGuide[babyAge.value];
         feedingAmount.textContent = guide.amount;
         feedingFrequency.textContent = guide.frequency;
+        feedingGain.textContent = guide.gain;
         feedingNote.textContent = guide.note;
 
         const weight = babyWeight ? Number(babyWeight.value) : 0;

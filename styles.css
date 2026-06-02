@@ -531,7 +531,7 @@ h1 span {
 
 .feeding-result {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
   margin-top: 14px;
 }
@@ -1013,5 +1013,9 @@ footer a {
     max-width: min(300px, calc(100vw - 64px));
     justify-self: center;
     margin-inline: auto;
+  }
+
+  .feeding-result {
+    grid-template-columns: 1fr;
   }
 }
