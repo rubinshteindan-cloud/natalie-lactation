@@ -153,8 +153,8 @@ a {
 }
 
 .header-cta .phone-icon {
-  width: 31px;
-  height: 31px;
+  width: 38px;
+  height: 38px;
   display: inline-flex;
   flex: 0 0 auto;
   color: #2f232a;
@@ -726,6 +726,11 @@ footer a {
   .header-cta {
     padding: 9px 12px;
     font-size: 0.9rem;
+  }
+
+  .header-cta .phone-icon {
+    width: 34px;
+    height: 34px;
   }
 
   .hero,
