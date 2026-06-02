@@ -113,7 +113,6 @@
           <aside class="feeding-calculator" aria-label="מחשבון הנקה לפי גיל">
             <div class="feeding-calculator-head">
               <span>מחשבון הנקה</span>
-              <strong>כמה בערך?</strong>
             </div>
             <label for="baby-age">גיל התינוק</label>
             <select id="baby-age">
@@ -406,8 +405,9 @@
         months1to3: {
           amount: "90-120 מ״ל",
           frequency: "6 פעמים ומעלה",
-          note: "בגיל חודש עד 3 חודשים היניקה לרוב מתייעלת, ולעיתים נפתחים מרווחים גדולים יותר.",
-          weightRelevant: false
+          note: "גם אם התינוק אוכל פחות מהטווח, כל עוד יש עלייה טובה במשקל זה יכול להיות תקין. בגיל 3 חודשים מצפים לרוב לעלייה של כ-150-200 גרם בשבוע.",
+          weightRelevant: true,
+          weeklyGain: "כ-150-200 גרם בשבוע"
         },
         months3to6: {
           amount: "90-120 מ״ל",
@@ -453,7 +453,8 @@
         const weight = babyWeight ? Number(babyWeight.value) : 0;
         if (weight > 0 && guide.weightRelevant) {
           const dailyAmount = Math.round(weight * 150);
-          feedingWeightNote.textContent = `לפי כלל אצבע של כ-150 מ״ל לק״ג ביממה: בערך ${dailyAmount} מ״ל ביממה.`;
+          const gainText = guide.weeklyGain ? ` קצב עלייה רצוי: ${guide.weeklyGain}.` : "";
+          feedingWeightNote.textContent = `לפי כלל אצבע של כ-150 מ״ל לק״ג ביממה: בערך ${dailyAmount} מ״ל ביממה.${gainText}`;
         } else if (weight > 0) {
           feedingWeightNote.textContent = "בגיל הזה המשקל פחות מתאים לחישוב כמות מדויקת; עדיף להסתכל על עלייה במשקל, חיוניות וסימני שובע.";
         } else {
