@@ -32,12 +32,13 @@ html {
 body {
   margin: 0;
   background:
-    radial-gradient(circle at 1px 1px, rgba(116, 45, 74, 0.045) 0 1px, transparent 1.8px),
-    radial-gradient(circle at 9px 7px, rgba(224, 91, 117, 0.032) 0 1.2px, transparent 2px),
-    radial-gradient(circle at 14px 16px, rgba(79, 154, 131, 0.024) 0 0.9px, transparent 1.8px),
+    radial-gradient(circle at 1px 1px, rgba(116, 45, 74, 0.075) 0 1.3px, transparent 2.3px),
+    radial-gradient(circle at 9px 7px, rgba(224, 91, 117, 0.055) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 14px 16px, rgba(79, 154, 131, 0.038) 0 1.1px, transparent 2.2px),
+    radial-gradient(circle at 21px 3px, rgba(76, 143, 196, 0.03) 0 1px, transparent 2px),
     linear-gradient(135deg, rgba(255, 236, 244, 0.95), rgba(247, 252, 246, 0.9) 45%, rgba(236, 247, 255, 0.88)),
     linear-gradient(180deg, #fff7fb 0%, #ffffff 46%, #fff0f5 100%);
-  background-size: 18px 18px, 28px 28px, 34px 34px, auto, auto;
+  background-size: 16px 16px, 24px 24px, 31px 31px, 37px 37px, auto, auto;
   color: var(--text);
   line-height: 1.65;
   max-width: 100%;
@@ -356,32 +357,8 @@ h1 span {
     linear-gradient(135deg, #833ab4, #c13584 46%, #e1306c 68%, #fd1d1d);
 }
 
-.quick-facts {
-  margin: 42px 0 0;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.quick-facts div {
-  border-top: 1px solid var(--border);
-  padding-top: 15px;
-}
-
-.quick-facts dt {
-  color: var(--blue);
-  font-size: 0.82rem;
-  font-weight: 850;
-}
-
-.quick-facts dd {
-  margin: 2px 0 0;
-  color: var(--text);
-  font-weight: 800;
-}
-
 .rotating-fact {
-  margin-top: 36px;
+  margin-top: 34px;
   padding: 22px 24px;
   border: 1px solid rgba(224, 91, 117, 0.22);
   border-radius: var(--radius);
@@ -441,6 +418,8 @@ h1 span {
   min-height: 520px;
   display: grid;
   place-items: center;
+  align-content: center;
+  gap: 22px;
 }
 
 .hero-visual::before {
@@ -529,6 +508,112 @@ h1 span {
 .portrait-fallback small {
   color: var(--muted);
   font-weight: 700;
+}
+
+.feeding-calculator {
+  position: relative;
+  z-index: 2;
+  width: min(390px, 92%);
+  max-width: calc(100vw - 48px);
+  justify-self: center;
+  margin-inline: auto;
+  padding: 18px 24px;
+  border: 1px solid rgba(224, 91, 117, 0.18);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 18px 42px rgba(116, 45, 74, 0.12);
+  backdrop-filter: blur(14px);
+}
+
+.feeding-calculator-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.feeding-calculator-head span {
+  color: var(--sage);
+  font-size: 0.86rem;
+  font-weight: 850;
+}
+
+.feeding-calculator-head strong {
+  color: var(--text);
+  font-size: 1.22rem;
+}
+
+.feeding-calculator label {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.feeding-calculator select,
+.feeding-calculator input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--text);
+  font: inherit;
+  font-weight: 800;
+}
+
+.feeding-calculator select {
+  margin-bottom: 12px;
+}
+
+.feeding-calculator input {
+  margin-bottom: 2px;
+}
+
+.feeding-result {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.feeding-result div {
+  padding: 12px;
+  border-radius: var(--radius);
+  background: rgba(255, 232, 239, 0.48);
+}
+
+.feeding-result span {
+  display: block;
+  color: var(--blue);
+  font-size: 0.78rem;
+  font-weight: 850;
+}
+
+.feeding-result strong {
+  display: block;
+  margin-top: 3px;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.feeding-result p {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.feeding-calculator small {
+  display: block;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
 }
 
 .section {
@@ -748,7 +833,7 @@ footer a {
     width: min(calc(100% - 28px), 680px);
     min-height: auto;
     padding: 34px 0 58px;
-    overflow: hidden;
+    overflow: visible;
   }
 
   h1 {
@@ -763,7 +848,7 @@ footer a {
   .hero-copy {
     max-width: 100%;
     text-align: center;
-    overflow: hidden;
+    overflow: visible;
     padding-inline: 16px;
   }
 
@@ -774,7 +859,6 @@ footer a {
   }
 
   .hero-actions,
-  .quick-facts,
   .rotating-fact {
     max-width: 440px;
     margin-inline: auto;
@@ -799,8 +883,9 @@ footer a {
   }
 
   .hero-visual {
-    min-height: 420px;
+    min-height: 650px;
     order: -1;
+    overflow: visible;
   }
 
   .portrait-frame {
@@ -809,10 +894,6 @@ footer a {
 
   .hero-visual::before {
     width: min(328px, 90%);
-  }
-
-  .quick-facts {
-    grid-template-columns: 1fr;
   }
 
   .rotating-fact {
@@ -884,11 +965,21 @@ footer a {
   }
 
   .hero-visual {
-    min-height: 390px;
+    min-height: 620px;
   }
 
   .portrait-frame {
     width: min(292px, 88%);
+  }
+
+  .feeding-calculator {
+    width: 270px;
+    max-width: 270px;
+    padding: 16px 22px;
+  }
+
+  .feeding-result {
+    grid-template-columns: 1fr;
   }
 
   .hero-visual::before {

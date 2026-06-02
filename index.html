@@ -83,21 +83,6 @@
             </a>
           </div>
 
-          <dl class="quick-facts" aria-label="פרטים מרכזיים">
-            <div>
-              <dt>אזור</dt>
-              <dd>ראשון לציון והסביבה</dd>
-            </div>
-            <div>
-              <dt>ייעוץ</dt>
-              <dd>ביקורי בית</dd>
-            </div>
-            <div>
-              <dt>גישה</dt>
-              <dd>עדינה, מעשית ותומכת</dd>
-            </div>
-          </dl>
-
           <aside class="rotating-fact" aria-live="polite">
             <span class="fact-heading">
               <svg class="fact-info-icon" viewBox="0 0 64 64" aria-hidden="true">
@@ -125,6 +110,43 @@
               <small>כאן תיכנס התמונה</small>
             </div>
           </div>
+          <aside class="feeding-calculator" aria-label="מחשבון הנקה לפי גיל">
+            <div class="feeding-calculator-head">
+              <span>מחשבון הנקה</span>
+              <strong>כמה בערך?</strong>
+            </div>
+            <label for="baby-age">גיל התינוק</label>
+            <select id="baby-age">
+              <option value="day1">יממה ראשונה</option>
+              <option value="day2">יממה שנייה</option>
+              <option value="day3">יממה שלישית</option>
+              <option value="day4">יממה רביעית</option>
+              <option value="day5">יממה חמישית</option>
+              <option value="day6">יממה שישית</option>
+              <option value="week2">שבוע 1-2</option>
+              <option value="month1">סביב גיל חודש</option>
+              <option value="months1to3">חודש עד 3 חודשים</option>
+              <option value="months3to6">3 עד 6 חודשים</option>
+              <option value="months6plus">חצי שנה ומעלה</option>
+            </select>
+            <label for="baby-weight">משקל נוכחי בק״ג (אופציונלי)</label>
+            <input id="baby-weight" type="number" min="1.5" max="12" step="0.1" inputmode="decimal" placeholder="לדוגמה 3.4" />
+            <div class="feeding-result" aria-live="polite">
+              <div>
+                <span>כמות לארוחה</span>
+                <strong id="feeding-amount">5-10 מ״ל</strong>
+              </div>
+              <div>
+                <span>קצב ביום</span>
+                <strong id="feeding-frequency">8-12 הנקות</strong>
+              </div>
+              <p id="feeding-note">
+                ביממה הראשונה הקיבה קטנה, והקולוסטרום מותאם בדיוק לכמויות קטנות ותכופות.
+              </p>
+              <p id="feeding-weight-note"></p>
+            </div>
+            <small>הערכה כללית לתינוק בריא; במקרה של כאב, ירידה במשקל או חשש - כדאי להתייעץ.</small>
+          </aside>
         </div>
       </section>
 
@@ -320,8 +342,86 @@
         "מטא-אנליזה מצאה שכל חודש נוסף של הנקה נקשר לכ-4% פחות סיכון לעודף משקל בהמשך הילדות.",
         "כל 12 חודשי הנקה לאורך החיים נקשרו לכ-4.3% פחות סיכון יחסי לסרטן שד אצל האם.",
         "מטא-אנליזה של 40 מחקרים מצאה שנשים שהניקו היו בסיכון נמוך בכ-30% לסרטן שחלה.",
+        "חלב אם מכיל רכיבים מהמערכת החיסונית של האם שעוזרים לתינוק לבנות הגנה משלו.",
+        "דרך חלב האם עוברים נוגדנים שיכולים להפחית סיכון לזיהומים במערכת העיכול, הנשימה והאוזניים.",
+        "משרד הבריאות מציין שהנקה קשורה להשפעה חיובית על ההתפתחות השכלית של תינוקות.",
+        "ההנקה יכולה להרגיע את התינוק, ובחלב אם יש מלטונין שרמתו עולה בלילה.",
+        "טעמו של חלב האם משתנה לפי תזונת האם, ויכול לעזור לתינוק להכיר מגוון טעמים בהמשך.",
+        "לאמא, הנקה מסייעת בכיווץ הרחם ובהחלמה אחרי הלידה.",
+        "הנקה נקשרה להפחתת סיכון אצל האם לסרטן שד, סרטן שחלה, סוכרת סוג 2 ומחלות לב וכלי דם.",
+        "הנקה ישירה חוסכת התעסקות עם חימום וניקוי בקבוקים, וגם מפחיתה עלויות ואריזות.",
+        "גם אם ההנקה קצרה או חלקית יותר מהתכנון, היא עדיין יכולה לתרום לבריאות התינוק.",
         "גם אם ההנקה התחילה קשה, דיוק קטן בזמן הנכון יכול לשנות את כל ההמשך."
       ];
+
+      const feedingGuide = {
+        day1: {
+          amount: "5-10 מ״ל",
+          frequency: "8-12 הנקות",
+          note: "ביממה הראשונה הקיבה קטנה, והקולוסטרום מותאם בדיוק לכמויות קטנות ותכופות.",
+          weightRelevant: false
+        },
+        day2: {
+          amount: "10-20 מ״ל",
+          frequency: "8-12 הנקות",
+          note: "ביממה השנייה הכמות לרוב עולה בהדרגה, ועדיין חשוב להציע הנקה בתדירות גבוהה.",
+          weightRelevant: false
+        },
+        day3: {
+          amount: "כ-30 מ״ל",
+          frequency: "לפחות 8 הנקות",
+          note: "סביב היממה השלישית החלב מתחיל להשתנות, והכמויות מתחילות לעלות.",
+          weightRelevant: false
+        },
+        day4: {
+          amount: "כ-40 מ״ל",
+          frequency: "לפחות 8 הנקות",
+          note: "עדיין מצפים להנקות תכופות; תינוק שמבקש יותר מקבל יותר לפי הצורך.",
+          weightRelevant: false
+        },
+        day5: {
+          amount: "כ-50 מ״ל",
+          frequency: "לפחות 8 הנקות",
+          note: "בשלב הזה חשוב לעקוב אחרי ערנות, חיתולים ועלייה הדרגתית בכמויות.",
+          weightRelevant: false
+        },
+        day6: {
+          amount: "כ-60 מ״ל",
+          frequency: "לפחות 8 הנקות",
+          note: "מהיממה השישית הכמות לארוחה בדרך כלל כבר משמעותית יותר, ועדיין יש שונות בין תינוקות.",
+          weightRelevant: true
+        },
+        week2: {
+          amount: "60-80 מ״ל",
+          frequency: "8 פעמים ומעלה",
+          note: "בשבועות הראשונים הכמויות גדלות, אבל סימני רעב ושובע חשובים לא פחות מהמספר.",
+          weightRelevant: true
+        },
+        month1: {
+          amount: "90-120 מ״ל",
+          frequency: "6-8 פעמים",
+          note: "סביב גיל חודש, אם התינוק עולה היטב במשקל ונראה חיוני, הטווחים יכולים להשתנות מעט.",
+          weightRelevant: true
+        },
+        months1to3: {
+          amount: "90-120 מ״ל",
+          frequency: "6 פעמים ומעלה",
+          note: "בגיל חודש עד 3 חודשים היניקה לרוב מתייעלת, ולעיתים נפתחים מרווחים גדולים יותר.",
+          weightRelevant: false
+        },
+        months3to6: {
+          amount: "90-120 מ״ל",
+          frequency: "6 פעמים ומעלה",
+          note: "בגיל הזה תיתכן יותר הסחת דעת וקיצור הנקות; עלייה במשקל והתנהגות התינוק הן המדדים החשובים.",
+          weightRelevant: false
+        },
+        months6plus: {
+          amount: "משתנה",
+          frequency: "לפי הנקה ומוצקים",
+          note: "עם התחלת מוצקים הכמויות משתנות, אבל חלב אם נשאר מרכיב משמעותי בתזונה לפחות עד גיל שנה.",
+          weightRelevant: false
+        }
+      };
 
       const factElement = document.getElementById("breastfeeding-fact");
       if (factElement) {
@@ -334,6 +434,42 @@
         showFact();
         setInterval(showFact, 30000);
       }
+
+      const babyAge = document.getElementById("baby-age");
+      const babyWeight = document.getElementById("baby-weight");
+      const feedingAmount = document.getElementById("feeding-amount");
+      const feedingFrequency = document.getElementById("feeding-frequency");
+      const feedingNote = document.getElementById("feeding-note");
+      const feedingWeightNote = document.getElementById("feeding-weight-note");
+
+      const updateFeedingGuide = () => {
+        if (!babyAge || !feedingAmount || !feedingFrequency || !feedingNote || !feedingWeightNote) return;
+
+        const guide = feedingGuide[babyAge.value];
+        feedingAmount.textContent = guide.amount;
+        feedingFrequency.textContent = guide.frequency;
+        feedingNote.textContent = guide.note;
+
+        const weight = babyWeight ? Number(babyWeight.value) : 0;
+        if (weight > 0 && guide.weightRelevant) {
+          const dailyAmount = Math.round(weight * 150);
+          feedingWeightNote.textContent = `לפי כלל אצבע של כ-150 מ״ל לק״ג ביממה: בערך ${dailyAmount} מ״ל ביממה.`;
+        } else if (weight > 0) {
+          feedingWeightNote.textContent = "בגיל הזה המשקל פחות מתאים לחישוב כמות מדויקת; עדיף להסתכל על עלייה במשקל, חיוניות וסימני שובע.";
+        } else {
+          feedingWeightNote.textContent = "";
+        }
+      };
+
+      if (babyAge) {
+        babyAge.addEventListener("change", updateFeedingGuide);
+      }
+
+      if (babyWeight) {
+        babyWeight.addEventListener("input", updateFeedingGuide);
+      }
+
+      updateFeedingGuide();
 
       const testimonialText = document.getElementById("testimonial-text");
       const testimonialAuthor = document.getElementById("testimonial-author");
