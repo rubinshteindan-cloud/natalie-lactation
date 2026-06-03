@@ -95,6 +95,18 @@
             <p id="breastfeeding-fact">
               הקולוסטרום הוא החלב הראשון, עשיר ברכיבים חיסוניים ומחכה לתינוק כבר אחרי הלידה.
             </p>
+            <div class="fact-controls" aria-label="דפדוף בין עובדות הנקה">
+              <button class="fact-nav-button" type="button" data-fact-direction="next" aria-label="לעובדה הבאה">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M8.7 5.3 15.4 12l-6.7 6.7" />
+                </svg>
+              </button>
+              <button class="fact-nav-button" type="button" data-fact-direction="prev" aria-label="לעובדה הקודמת">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="m15.3 5.3-6.7 6.7 6.7 6.7" />
+                </svg>
+              </button>
+            </div>
           </aside>
         </div>
 
@@ -432,13 +444,29 @@
       const factElement = document.getElementById("breastfeeding-fact");
       if (factElement) {
         let factIndex = Math.floor(Math.random() * breastfeedingFacts.length);
-        const showFact = () => {
+        let factTimer;
+        const renderFact = () => {
           factElement.textContent = breastfeedingFacts[factIndex];
-          factIndex = (factIndex + 1) % breastfeedingFacts.length;
+        };
+        const moveFact = (direction = 1) => {
+          factIndex = (factIndex + direction + breastfeedingFacts.length) % breastfeedingFacts.length;
+          renderFact();
+        };
+        const restartFactTimer = () => {
+          window.clearInterval(factTimer);
+          factTimer = window.setInterval(() => moveFact(1), 30000);
         };
 
-        showFact();
-        setInterval(showFact, 30000);
+        renderFact();
+        restartFactTimer();
+
+        document.querySelectorAll("[data-fact-direction]").forEach((button) => {
+          button.addEventListener("click", () => {
+            const direction = button.dataset.factDirection === "prev" ? -1 : 1;
+            moveFact(direction);
+            restartFactTimer();
+          });
+        });
       }
 
       const babyAge = document.getElementById("baby-age");
