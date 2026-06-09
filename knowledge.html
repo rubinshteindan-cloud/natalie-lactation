@@ -15,6 +15,20 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body class="knowledge-page">
+    <script>
+      const knowledgeNavigation = performance.getEntriesByType("navigation")[0];
+      const isKnowledgeReload = knowledgeNavigation?.type === "reload";
+      if (isKnowledgeReload) {
+        window.location.replace("./index.html");
+      } else if (window.sessionStorage.getItem("knowledgeAccess") !== "1") {
+        const password = window.prompt("Password");
+        if (password === "18110509") {
+          window.sessionStorage.setItem("knowledgeAccess", "1");
+        } else {
+          window.location.replace("./index.html");
+        }
+      }
+    </script>
     <main class="knowledge-shell">
       <a class="knowledge-home" href="./index.html" aria-label="חזרה לעמוד הבית">
         <svg viewBox="0 0 24 24" aria-hidden="true">

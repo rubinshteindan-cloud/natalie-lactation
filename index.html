@@ -349,6 +349,7 @@
           event.preventDefault();
           const password = window.prompt("Password");
           if (password === "18110509") {
+            window.sessionStorage.setItem("knowledgeAccess", "1");
             window.location.href = knowledgeEntry.href;
           }
         });
