@@ -80,6 +80,20 @@
           return map[character];
         });
 
+      const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+      const highlightTerms = (value, terms) => {
+        let highlighted = escapeHtml(value);
+        terms
+          .filter((term) => term.length > 1)
+          .sort((a, b) => b.length - a.length)
+          .forEach((term) => {
+            const pattern = new RegExp(`(${escapeRegExp(escapeHtml(term))})`, "gi");
+            highlighted = highlighted.replace(pattern, "<mark>$1</mark>");
+          });
+        return highlighted;
+      };
+
       const getSnippet = (text, terms) => {
         const normalizedText = normalize(text);
         let index = -1;
@@ -126,7 +140,7 @@
         statusElement.textContent = `נמצאו ${matches.length} תוצאות מובילות`;
         resultsElement.innerHTML = matches
           .map(({ entry }) => {
-            const snippet = escapeHtml(getSnippet(entry.text, terms));
+            const snippet = highlightTerms(getSnippet(entry.text, terms), terms);
             const pdfUrl = `${encodeURI(entry.file)}#page=${entry.page}`;
             return `
               <a class="knowledge-result" href="${pdfUrl}" target="_blank" rel="noreferrer">
