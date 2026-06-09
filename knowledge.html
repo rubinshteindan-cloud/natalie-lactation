@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>חיפוש ידע מקצועי | נטלי בארטפלד</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="knowledge-page">
+    <main class="knowledge-shell">
+      <a class="knowledge-home" href="./index.html" aria-label="חזרה לעמוד הבית">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 11.5 12 4l9 7.5" />
+          <path d="M5.5 10.5V20h13v-9.5" />
+          <path d="M9.5 20v-5h5v5" />
+        </svg>
+      </a>
+
+      <section class="knowledge-card" aria-label="חיפוש ידע מקצועי">
+        <div class="knowledge-title">
+          <span>חיפוש ידע מקצועי</span>
+          <small>מאגר פנימי מתוך קבצי ההדרכה</small>
+        </div>
+
+        <label class="knowledge-search-label" for="knowledge-search">מה לחפש?</label>
+        <div class="knowledge-search-box">
+          <input
+            id="knowledge-search"
+            type="search"
+            autocomplete="off"
+            placeholder="לדוגמה: צהבת, לשון קשורה, כאבים, שאיבה"
+          />
+          <button id="knowledge-search-button" type="button">חיפוש</button>
+        </div>
+
+        <p class="knowledge-status" id="knowledge-status">טוענת את המאגר...</p>
+        <div class="knowledge-results" id="knowledge-results" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <script>
+      const searchInput = document.getElementById("knowledge-search");
+      const searchButton = document.getElementById("knowledge-search-button");
+      const statusElement = document.getElementById("knowledge-status");
+      const resultsElement = document.getElementById("knowledge-results");
+      let knowledgeEntries = [];
+
+      const normalize = (value) =>
+        value
+          .toLowerCase()
+          .replace(/[״׳"']/g, "")
+          .replace(/[^\p{L}\p{N}\s-]/gu, " ")
+          .replace(/\s+/g, " ")
+          .trim();
+
+      const escapeHtml = (value) =>
+        value.replace(/[&<>"']/g, (character) => {
+          const map = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" };
+          return map[character];
+        });
+
+      const getSnippet = (text, terms) => {
+        const normalizedText = normalize(text);
+        let index = -1;
+        for (const term of terms) {
+          index = normalizedText.indexOf(term);
+          if (index >= 0) break;
+        }
+
+        const start = index >= 0 ? Math.max(0, index - 90) : 0;
+        const end = Math.min(text.length, start + 310);
+        const prefix = start > 0 ? "..." : "";
+        const suffix = end < text.length ? "..." : "";
+        return `${prefix}${text.slice(start, end)}${suffix}`;
+      };
+
+      const runSearch = () => {
+        const query = normalize(searchInput.value);
+        resultsElement.innerHTML = "";
+
+        if (query.length < 2) {
+          statusElement.textContent = "כתבי לפחות שתי אותיות כדי לחפש.";
+          return;
+        }
+
+        const terms = query.split(" ").filter(Boolean);
+        const matches = knowledgeEntries
+          .map((entry) => {
+            const haystack = entry.normalized;
+            const score = terms.reduce((total, term) => {
+              if (!haystack.includes(term)) return total;
+              return total + (haystack.includes(` ${term} `) ? 4 : 2);
+            }, 0);
+            return { entry, score };
+          })
+          .filter((match) => match.score > 0)
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 12);
+
+        if (!matches.length) {
+          statusElement.textContent = "לא נמצאו תוצאות מתאימות. נסי ניסוח אחר או מילה קצרה יותר.";
+          return;
+        }
+
+        statusElement.textContent = `נמצאו ${matches.length} תוצאות מובילות`;
+        resultsElement.innerHTML = matches
+          .map(({ entry }) => {
+            const snippet = escapeHtml(getSnippet(entry.text, terms));
+            return `
+              <article class="knowledge-result">
+                <strong>${escapeHtml(entry.source)}</strong>
+                <span>עמוד ${entry.page} מתוך ${entry.pages}</span>
+                <p>${snippet}</p>
+              </article>
+            `;
+          })
+          .join("");
+      };
+
+      fetch("./search-index.json", { cache: "no-store" })
+        .then((response) => response.json())
+        .then((index) => {
+          knowledgeEntries = index.entries.map((entry) => ({
+            ...entry,
+            normalized: normalize(`${entry.source} ${entry.text}`),
+          }));
+          statusElement.textContent = `המאגר מוכן לחיפוש (${index.documentCount} מסמכים).`;
+          searchInput.focus();
+        })
+        .catch(() => {
+          statusElement.textContent = "לא הצלחתי לטעון את המאגר. כדאי לרענן את העמוד.";
+        });
+
+      searchButton.addEventListener("click", runSearch);
+      searchInput.addEventListener("input", () => {
+        window.clearTimeout(searchInput.searchTimer);
+        searchInput.searchTimer = window.setTimeout(runSearch, 180);
+      });
+      searchInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") runSearch();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /knowledge.html
+Disallow: /search-index.json
