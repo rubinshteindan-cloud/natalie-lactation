@@ -363,8 +363,8 @@ h1 span {
 
 .knowledge-entry {
   position: fixed;
-  left: 22px;
-  bottom: 152px;
+  right: 14px;
+  bottom: 10px;
   z-index: 45;
   width: 34px;
   height: 34px;
@@ -1216,8 +1216,8 @@ footer a {
   }
 
   .knowledge-entry {
-    left: 23px;
-    bottom: 140px;
+    right: 10px;
+    bottom: 8px;
     width: 30px;
     height: 30px;
   }
