@@ -62,6 +62,7 @@ def build_index() -> dict:
                     {
                         "id": f"{pdf_path.stem}-{page_number}-{chunk_index}",
                         "source": pdf_path.stem,
+                        "file": f"data/{pdf_path.name}",
                         "page": page_number,
                         "pages": page_count,
                         "text": chunk,

@@ -362,14 +362,13 @@ h1 span {
 }
 
 .knowledge-entry {
-  position: fixed;
-  right: 14px;
-  bottom: 10px;
-  z-index: 45;
+  position: relative;
+  z-index: 1;
   width: 34px;
   height: 34px;
   display: grid;
   place-items: center;
+  margin: -30px 18px 16px auto;
   border: 1px solid rgba(224, 91, 117, 0.18);
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.64);
@@ -884,6 +883,10 @@ footer a {
   backdrop-filter: blur(14px);
 }
 
+.knowledge-card.compact {
+  padding: clamp(16px, 4vw, 24px);
+}
+
 .knowledge-title {
   display: grid;
   gap: 4px;
@@ -931,7 +934,10 @@ footer a {
 
 .knowledge-search-box button {
   min-height: 54px;
-  padding: 0 24px;
+  width: 54px;
+  padding: 0;
+  display: grid;
+  place-items: center;
   border: 0;
   border-radius: 999px;
   background: linear-gradient(135deg, var(--accent), #f12f61);
@@ -940,6 +946,16 @@ footer a {
   font-weight: 900;
   cursor: pointer;
   box-shadow: 0 16px 32px rgba(224, 91, 117, 0.24);
+}
+
+.knowledge-search-box button svg {
+  width: 23px;
+  height: 23px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .knowledge-status {
@@ -956,10 +972,19 @@ footer a {
 }
 
 .knowledge-result {
+  display: block;
   padding: 16px;
   border: 1px solid rgba(224, 91, 117, 0.16);
   border-radius: var(--radius);
   background: rgba(255, 247, 251, 0.82);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.knowledge-result:hover,
+.knowledge-result:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(224, 91, 117, 0.32);
+  box-shadow: 0 14px 34px rgba(116, 45, 74, 0.12);
 }
 
 .knowledge-result strong,
@@ -1216,10 +1241,9 @@ footer a {
   }
 
   .knowledge-entry {
-    right: 10px;
-    bottom: 8px;
     width: 30px;
     height: 30px;
+    margin: -22px 12px 12px auto;
   }
 
   .knowledge-search-box {

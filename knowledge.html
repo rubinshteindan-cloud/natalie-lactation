@@ -24,24 +24,23 @@
         </svg>
       </a>
 
-      <section class="knowledge-card" aria-label="חיפוש ידע מקצועי">
-        <div class="knowledge-title">
-          <span>חיפוש ידע מקצועי</span>
-          <small>מאגר פנימי מתוך קבצי ההדרכה</small>
-        </div>
-
-        <label class="knowledge-search-label" for="knowledge-search">מה לחפש?</label>
+      <section class="knowledge-card compact" aria-label="חיפוש ידע מקצועי">
         <div class="knowledge-search-box">
           <input
             id="knowledge-search"
             type="search"
             autocomplete="off"
-            placeholder="לדוגמה: צהבת, לשון קשורה, כאבים, שאיבה"
+            placeholder="חיפוש..."
           />
-          <button id="knowledge-search-button" type="button">חיפוש</button>
+          <button id="knowledge-search-button" type="button" aria-label="חיפוש">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m21 21-4.3-4.3" />
+              <circle cx="11" cy="11" r="7" />
+            </svg>
+          </button>
         </div>
 
-        <p class="knowledge-status" id="knowledge-status">טוענת את המאגר...</p>
+        <p class="knowledge-status" id="knowledge-status"></p>
         <div class="knowledge-results" id="knowledge-results" aria-live="polite"></div>
       </section>
     </main>
@@ -114,12 +113,13 @@
         resultsElement.innerHTML = matches
           .map(({ entry }) => {
             const snippet = escapeHtml(getSnippet(entry.text, terms));
+            const pdfUrl = `${encodeURI(entry.file)}#page=${entry.page}`;
             return `
-              <article class="knowledge-result">
+              <a class="knowledge-result" href="${pdfUrl}" target="_blank" rel="noreferrer">
                 <strong>${escapeHtml(entry.source)}</strong>
                 <span>עמוד ${entry.page} מתוך ${entry.pages}</span>
                 <p>${snippet}</p>
-              </article>
+              </a>
             `;
           })
           .join("");
@@ -132,7 +132,6 @@
             ...entry,
             normalized: normalize(`${entry.source} ${entry.text}`),
           }));
-          statusElement.textContent = `המאגר מוכן לחיפוש (${index.documentCount} מסמכים).`;
           searchInput.focus();
         })
         .catch(() => {

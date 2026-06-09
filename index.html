@@ -284,7 +284,7 @@
       <span>נטלי בארטפלד · מדריכת הנקה מוסמכת · ראשון לציון והסביבה</span>
       <a href="tel:0545547257">054-554-7257</a>
     </footer>
-    <a class="knowledge-entry" href="./knowledge.html" aria-label="פתחי חיפוש ידע מקצועי">
+    <a class="knowledge-entry" href="./knowledge.html" aria-label="פתחי חיפוש ידע מקצועי" data-knowledge-entry>
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M5 5.5A2.5 2.5 0 0 1 7.5 3H20v15H7.5A2.5 2.5 0 0 0 5 20.5v-15Z" />
         <path d="M5 20.5A2.5 2.5 0 0 1 7.5 18H20" />
@@ -342,6 +342,17 @@
           author: "טניה ו׳"
         }
       ];
+
+      const knowledgeEntry = document.querySelector("[data-knowledge-entry]");
+      if (knowledgeEntry) {
+        knowledgeEntry.addEventListener("click", (event) => {
+          event.preventDefault();
+          const password = window.prompt("Password");
+          if (password === "18110509") {
+            window.location.href = knowledgeEntry.href;
+          }
+        });
+      }
 
       const breastfeedingFacts = [
         "הקולוסטרום הוא החלב הראשון, עשיר ברכיבים חיסוניים ומחכה לתינוק כבר אחרי הלידה.",
