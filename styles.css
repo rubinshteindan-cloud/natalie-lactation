@@ -85,7 +85,7 @@ a {
   place-items: center;
   border-radius: 50%;
   overflow: hidden;
-  background: #fff;
+  background: #fff7f3;
   border: 1px solid rgba(224, 91, 117, 0.28);
   color: var(--accent-dark);
   box-shadow: 0 12px 28px rgba(224, 91, 117, 0.18);
@@ -95,12 +95,11 @@ a {
 }
 
 .brand-mark img {
-  width: 166px;
-  height: 166px;
+  width: 154px;
+  height: 154px;
   display: block;
   object-fit: cover;
-  object-position: center 45%;
-  mix-blend-mode: multiply;
+  object-position: center;
 }
 
 .brand strong,
@@ -538,12 +537,16 @@ h1 span {
 .portrait-fallback {
   position: absolute;
   inset: 0;
-  display: grid;
+  display: none;
   place-items: center;
   align-content: center;
   gap: 4px;
   color: var(--accent-dark);
   text-align: center;
+}
+
+.portrait-frame img.is-missing + .portrait-fallback {
+  display: grid;
 }
 
 .portrait-fallback span {
@@ -1150,6 +1153,12 @@ footer a {
 }
 
 @media (max-width: 480px) {
+  .site-header {
+    width: min(calc(100% - 48px), 328px);
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
   .brand {
     min-width: 0;
     flex: 0 0 auto;
@@ -1165,13 +1174,23 @@ footer a {
   }
 
   .brand-mark {
-    width: 109px;
-    height: 109px;
+    width: 92px;
+    height: 92px;
   }
 
   .brand-mark img {
-    width: 116px;
-    height: 116px;
+    width: 92px;
+    height: 92px;
+  }
+
+  .header-cta {
+    padding: 8px 10px;
+    font-size: 0.86rem;
+  }
+
+  .header-cta .phone-icon {
+    width: 30px;
+    height: 30px;
   }
 
   .hero-actions,
@@ -1275,13 +1294,11 @@ footer a {
   }
 
   .brand {
-    position: absolute;
-    top: 10px;
-    right: 28px;
+    position: static;
   }
 
   .header-cta {
-    margin-right: auto;
+    margin-right: 0;
   }
 
   .hero {
