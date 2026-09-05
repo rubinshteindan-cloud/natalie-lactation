@@ -32,13 +32,8 @@ html {
 body {
   margin: 0;
   background:
-    radial-gradient(circle at 1px 1px, rgba(116, 45, 74, 0.075) 0 1.3px, transparent 2.3px),
-    radial-gradient(circle at 9px 7px, rgba(224, 91, 117, 0.055) 0 1.5px, transparent 2.5px),
-    radial-gradient(circle at 14px 16px, rgba(79, 154, 131, 0.038) 0 1.1px, transparent 2.2px),
-    radial-gradient(circle at 21px 3px, rgba(76, 143, 196, 0.03) 0 1px, transparent 2px),
     linear-gradient(135deg, rgba(255, 236, 244, 0.95), rgba(247, 252, 246, 0.9) 45%, rgba(236, 247, 255, 0.88)),
     linear-gradient(180deg, #fff7fb 0%, #ffffff 46%, #fff0f5 100%);
-  background-size: 16px 16px, 24px 24px, 31px 31px, 37px 37px, auto, auto;
   color: var(--text);
   line-height: 1.65;
   max-width: 100%;
@@ -154,21 +149,6 @@ a {
   background: rgba(255, 255, 255, 0.84);
   font-weight: 800;
   white-space: nowrap;
-}
-
-.header-cta .phone-icon {
-  width: 38px;
-  height: 38px;
-  display: inline-flex;
-  flex: 0 0 auto;
-  color: #2f232a;
-}
-
-.header-cta .phone-icon svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-  fill: currentColor;
 }
 
 .hero {
@@ -1041,11 +1021,6 @@ footer a {
     font-size: 0.9rem;
   }
 
-  .header-cta .phone-icon {
-    width: 34px;
-    height: 34px;
-  }
-
   .hero,
   .intro,
   .split,
@@ -1186,11 +1161,6 @@ footer a {
   .header-cta {
     padding: 8px 10px;
     font-size: 0.86rem;
-  }
-
-  .header-cta .phone-icon {
-    width: 30px;
-    height: 30px;
   }
 
   .hero-actions,
