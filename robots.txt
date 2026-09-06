@@ -1,3 +1,4 @@
 User-agent: *
+Disallow: /admin.html
 Disallow: /knowledge.html
 Disallow: /search-index.json

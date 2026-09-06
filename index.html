@@ -44,11 +44,11 @@
       <section class="hero">
         <div class="hero-copy">
           <h1>
-            <span>יעוץ הנקה</span>
-            <span>אישי, מקצועי</span>
-            <span>ורגיש</span>
+            <span data-content="hero.title.0">יעוץ הנקה</span>
+            <span data-content="hero.title.1">אישי, מקצועי</span>
+            <span data-content="hero.title.2">ורגיש</span>
           </h1>
-          <p>
+          <p data-content="hero.intro">
             נעים מאוד, אני נטלי, אמא ל3 ומדריכת הנקה מוסמכת מראשון לציון. נוטים
             לחשוב שהנקה היא דבר טבעי ואינסטינקטיבי שכל אישה שיולדת יכולה ואמורה
             לעשות בעיניים עצומות. אבל האמת היא שיש לפעמים הרבה קשיים בדרך ומאחר
@@ -162,9 +162,9 @@
 
       <section class="section intro">
         <div class="section-heading">
-          <h2>יש הרבה דרכים טובות להניק. נמצא יחד את הדרך שמתאימה לכן.</h2>
+          <h2 data-content="intro.title">יש הרבה דרכים טובות להניק. נמצא יחד את הדרך שמתאימה לכן.</h2>
         </div>
-        <p>
+        <p data-content="intro.body">
           ייעוץ הנקה טוב מתחיל בהקשבה: למה כואב, מה מלחיץ, מה כבר עובד,
           ומה היית רוצה שירגיש קל יותר. בפגישה נסתכל על החיבור לשד, תנוחות,
           סימני שובע, שאיבות ושגרת ההנקה בבית.
@@ -173,34 +173,34 @@
 
       <section class="section support" id="support">
         <div class="section-heading">
-          <h2>איך אפשר לעזור</h2>
-          <p>פגישה ביתית ממוקדת, עם מקום לשאלות ובלי לחץ.</p>
+          <h2 data-content="support.title">איך אפשר לעזור</h2>
+          <p data-content="support.subtitle">פגישה ביתית ממוקדת, עם מקום לשאלות ובלי לחץ.</p>
         </div>
 
         <div class="support-grid">
           <article>
-            <h3>כאבים ופצעים</h3>
-            <p>בדיקה עדינה של החיבור, תנוחה והאחיזה כדי להפחית כאב ולשפר את ההנקה.</p>
+            <h3 data-content="support.cards.0.title">כאבים ופצעים</h3>
+            <p data-content="support.cards.0.body">בדיקה עדינה של החיבור, תנוחה והאחיזה כדי להפחית כאב ולשפר את ההנקה.</p>
           </article>
           <article>
-            <h3>קושי בחיבור לשד</h3>
-            <p>ליווי מעשי בזמן אמת, עם התאמות קטנות שיכולות לעשות הבדל גדול.</p>
+            <h3 data-content="support.cards.1.title">קושי בחיבור לשד</h3>
+            <p data-content="support.cards.1.body">ליווי מעשי בזמן אמת, עם התאמות קטנות שיכולות לעשות הבדל גדול.</p>
           </article>
           <article>
-            <h3>שאיבות ובקבוקים</h3>
-            <p>בניית שגרה שמתאימה לבית, לחזרה לעבודה ולצרכים של התינוק.</p>
+            <h3 data-content="support.cards.2.title">שאיבות ובקבוקים</h3>
+            <p data-content="support.cards.2.body">בניית שגרה שמתאימה לבית, לחזרה לעבודה ולצרכים של התינוק.</p>
           </article>
           <article>
-            <h3>מעקב אחרי משקל ושובע</h3>
-            <p>הבנה של סימני שובע, יציאות, תדירות הנקות ומתי כדאי לבדוק עוד.</p>
+            <h3 data-content="support.cards.3.title">מעקב אחרי משקל ושובע</h3>
+            <p data-content="support.cards.3.body">הבנה של סימני שובע, יציאות, תדירות הנקות ומתי כדאי לבדוק עוד.</p>
           </article>
           <article>
-            <h3>הכנה לפני לידה</h3>
-            <p>שיחה רגועה שמסדרת ציפיות, ציוד, הימים הראשונים ומה עושים כשקשה.</p>
+            <h3 data-content="support.cards.4.title">הכנה לפני לידה</h3>
+            <p data-content="support.cards.4.body">שיחה רגועה שמסדרת ציפיות, ציוד, הימים הראשונים ומה עושים כשקשה.</p>
           </article>
           <article>
-            <h3>ליווי אחרי לידה</h3>
-            <p>תמיכה מקצועית בתקופה רגישה, בבית שלך ובקצב שלך.</p>
+            <h3 data-content="support.cards.5.title">ליווי אחרי לידה</h3>
+            <p data-content="support.cards.5.body">תמיכה מקצועית בתקופה רגישה, בבית שלך ובקצב שלך.</p>
           </article>
         </div>
       </section>
@@ -308,6 +308,37 @@
       </a>
     </div>
     <script>
+      (async () => {
+      const getContentValue = (source, path) => {
+        return path.split(".").reduce((value, key) => {
+          if (value === undefined || value === null) return undefined;
+          return value[key];
+        }, source);
+      };
+
+      const fetchEditableContent = async () => {
+        try {
+          const response = await fetch(`./content.json?v=${Date.now()}`, { cache: "no-store" });
+          if (!response.ok) return null;
+          return await response.json();
+        } catch (error) {
+          return null;
+        }
+      };
+
+      const applyEditableContent = (content) => {
+        if (!content) return;
+        document.querySelectorAll("[data-content]").forEach((element) => {
+          const value = getContentValue(content, element.dataset.content);
+          if (typeof value === "string") {
+            element.textContent = value;
+          }
+        });
+      };
+
+      const siteContent = await fetchEditableContent();
+      applyEditableContent(siteContent);
+
       const testimonials = [
         {
           text: "“נטלי נכנסה אלינו הביתה עם המון שקט. תוך כמה דקות היא ראתה מה מפריע לחיבור, כיוונה בעדינות, ופתאום ההנקה הרגישה אפשרית.”",
@@ -351,7 +382,7 @@
         });
       }
 
-      const breastfeedingFacts = [
+      let breastfeedingFacts = [
         "הקולוסטרום הוא החלב הראשון, עשיר ברכיבים חיסוניים ומחכה לתינוק כבר אחרי הלידה.",
         "כבר בימים הראשונים התינוק מקבל דרך הקולוסטרום תמיכה חשובה למערכת החיסון.",
         "קולוסטרום מסייע לפעילות המעיים ולפינוי המקוניום בימים הראשונים.",
@@ -382,6 +413,13 @@
         "גם אם ההנקה קצרה או חלקית יותר מהתכנון, היא עדיין יכולה לתרום לבריאות התינוק.",
         "גם אם ההנקה התחילה קשה, דיוק קטן בזמן הנכון יכול לשנות את כל ההמשך."
       ];
+
+      if (Array.isArray(siteContent?.facts)) {
+        const editableFacts = siteContent.facts.filter((fact) => typeof fact === "string" && fact.trim());
+        if (editableFacts.length) {
+          breastfeedingFacts = editableFacts;
+        }
+      }
 
       const feedingGuide = {
         day1: {
@@ -536,6 +574,7 @@
         showTestimonial();
         setInterval(showTestimonial, 20000);
       }
+      })();
     </script>
   </body>
 </html>
