@@ -7,9 +7,9 @@
   <meta name="theme-color" content="#f8f2e8">
   <title>סדנת הכנה להנקה | נטלי בארטפלד</title>
   <link rel="icon" type="image/webp" href="assets/nb-logo.webp">
-  <link rel="stylesheet" href="assets/style.css?v=4">
-  <script src="workshop.js" defer></script>
-  <script src="assets/site.js" defer></script>
+  <link rel="stylesheet" href="assets/style.css?v=5">
+  <script src="workshop.js?v=3" defer></script>
+  <script src="assets/site.js?v=3" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">דילוג לתוכן</a>
@@ -89,17 +89,20 @@
         <div>
           <h2 id="register-title">הרשמה לסדנה</h2>
           <p id="registration-intro" data-copy="registrationIntro" hidden></p>
-          <p id="whatsapp-intro">כתבי לי בוואטסאפ כדי להירשם. אחזור אלייך אישית עם קישור לתשלום ב־Bit והפרטים להשלמת ההרשמה.</p>
         </div>
         <div class="form-card">
-          <div id="registration-whatsapp">
-            <a class="button" data-contact="whatsappRegistration" href="https://wa.me/972545547257">להרשמה בוואטסאפ</a>
-          </div>
-          <div id="registration-form" hidden>
+          <p id="registration-unavailable">כדי למלא את טופס ההרשמה, יש להפעיל JavaScript ולרענן את הדף.</p>
+          <form id="registration-form" method="post" hidden>
+            <input name="submission_id" type="hidden">
+            <div hidden><label>השאירי שדה זה ריק <input name="website" autocomplete="off" tabindex="-1"></label></div>
+            <div class="registration-fields">
+              <label>שם מלא <input name="full_name" autocomplete="name" maxlength="120" required></label>
+              <label>מספר טלפון <input name="phone" type="tel" autocomplete="tel" dir="ltr" maxlength="30" required></label>
+              <label>שבוע היריון <small>(רשות)</small><input name="pregnancy_week" type="number" inputmode="numeric" min="1" max="45" step="1"></label>
+            </div>
             <p class="form-privacy">הפרטים ישמשו לטיפול בהרשמה וליצירת קשר איתך בנושא הסדנה.</p>
-            <iframe class="registration-frame" title="טופס הרשמה לסדנת הכנה להנקה" height="500" loading="lazy"></iframe>
-            <p class="form-privacy"><a id="registration-link">פתיחת טופס ההרשמה בעמוד נפרד</a></p>
-          </div>
+            <button class="button registration-submit" type="submit">שליחת פרטי הרשמה</button>
+          </form>
         </div>
       </div>
     </section>

@@ -8,7 +8,6 @@ document.querySelectorAll("[data-copy]").forEach((element) => {
 const contactLinks = {
   website: `https://${workshop.website}`,
   whatsapp: `https://wa.me/${workshop.internationalPhone}`,
-  whatsappRegistration: `https://wa.me/${workshop.internationalPhone}?text=${encodeURIComponent("היי נטלי, אשמח להירשם לסדנת ההכנה להנקה.")}`,
   instagram: `https://www.instagram.com/${workshop.instagram}/`
 };
 
@@ -36,19 +35,35 @@ for (const [question, answer] of workshop.faq) {
   document.querySelector("#faq-items").append(item);
 }
 
-const formId = workshop.tallyFormId.trim();
-if (/^[A-Za-z0-9]+$/.test(formId)) {
+const endpoint = workshop.registrationEndpoint.trim();
+if (/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(endpoint)) {
   const form = document.querySelector("#registration-form");
-  const frame = form.querySelector("iframe");
-  frame.src = `https://tally.so/embed/${formId}?hideTitle=1&transparentBackground=1&dynamicHeight=1`;
-  document.querySelector("#registration-link").href = `https://tally.so/r/${formId}`;
-  document.querySelector("#registration-whatsapp").hidden = true;
-  document.querySelector("#whatsapp-intro").hidden = true;
+  const submit = form.querySelector("button");
+  const fullName = form.elements.full_name;
+  const phone = form.elements.phone;
+  form.action = endpoint;
+  form.elements.submission_id.value = crypto.randomUUID();
+  document.querySelector("#registration-unavailable").hidden = true;
   document.querySelector("#registration-intro").hidden = false;
   form.hidden = false;
 
-  const embedScript = document.createElement("script");
-  embedScript.src = "https://tally.so/widgets/embed.js";
-  embedScript.async = true;
-  document.body.append(embedScript);
+  form.addEventListener("input", () => {
+    fullName.setCustomValidity("");
+    phone.setCustomValidity("");
+  });
+  form.addEventListener("submit", (event) => {
+    const digits = phone.value.replace(/\D/g, "");
+    fullName.setCustomValidity(fullName.value.trim() ? "" : "הזיני שם מלא.");
+    phone.setCustomValidity(/^\+?[\d\s().-]+$/.test(phone.value.trim()) && digits.length >= 7 && digits.length <= 15 ? "" : "הזיני מספר טלפון תקין.");
+    if (!form.reportValidity() || submit.disabled) {
+      event.preventDefault();
+      return;
+    }
+    submit.disabled = true;
+    submit.textContent = "שולחת…";
+  });
+  window.addEventListener("pageshow", () => {
+    submit.disabled = false;
+    submit.textContent = "שליחת פרטי הרשמה";
+  });
 }

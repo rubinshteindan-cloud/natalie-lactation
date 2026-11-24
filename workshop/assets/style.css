@@ -141,9 +141,13 @@ section[id] { scroll-margin-block-start: 24px; }
 .register h2 { margin-block-end: 14px; }
 .register-inner > div:first-child > p { max-width: 31ch; font-size: 1.16rem; }
 .form-card { padding: clamp(19px, 4vw, 36px); background: var(--white); border: 1px solid #e4c7cd; border-radius: 15px; }
-#registration-whatsapp { text-align: center; }
-.registration-frame { display: block; inline-size: 100%; border: 0; margin-block: 10px; }
-.form-privacy { color: var(--muted); font-size: .91rem; }
+.registration-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.registration-fields label { display: block; font-weight: 650; }
+.registration-fields small { color: var(--muted); font-weight: 400; }
+.registration-fields input { display: block; width: 100%; min-height: 46px; margin-block-start: 5px; padding: 7px 10px; border: 1px solid #bba9ac; border-radius: 7px; color: var(--ink); background: white; }
+.form-privacy { margin-block: 16px; color: var(--muted); font-size: .91rem; }
+.registration-submit { width: 100%; }
+.registration-submit:disabled { opacity: .7; cursor: wait; }
 .footer { padding-block: 20px; }
 .footer-inner > span { font-weight: 700; }
 .footer-inner div { display: flex; align-items: center; flex-wrap: wrap; column-gap: 21px; row-gap: 3px; }
@@ -179,6 +183,7 @@ section[id] { scroll-margin-block-start: 24px; }
   .fact { grid-column: span 1; }
   .fact-date, .fact-meta { grid-column: 1 / -1; }
   .fact-meta { justify-content: space-between; text-align: start; padding-inline: 3px; }
+  .registration-fields { grid-template-columns: minmax(0, 1fr); }
   .footer-inner { flex-direction: column; align-items: flex-start; gap: 3px; }
 }
 
