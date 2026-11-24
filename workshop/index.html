@@ -92,7 +92,7 @@
         </div>
         <div class="form-card">
           <p id="registration-unavailable">כדי למלא את טופס ההרשמה, יש להפעיל JavaScript ולרענן את הדף.</p>
-          <form id="registration-form" method="post" hidden>
+          <form id="registration-form" method="post" aria-labelledby="register-title" aria-describedby="registration-privacy" hidden>
             <input name="submission_id" type="hidden">
             <div hidden><label>השאירי שדה זה ריק <input name="website" autocomplete="off" tabindex="-1"></label></div>
             <div class="registration-fields">
@@ -100,7 +100,7 @@
               <label>מספר טלפון <input name="phone" type="tel" autocomplete="tel" dir="ltr" maxlength="30" required></label>
               <label>שבוע היריון <small>(רשות)</small><input name="pregnancy_week" type="number" inputmode="numeric" min="1" max="45" step="1"></label>
             </div>
-            <p class="form-privacy">הפרטים ישמשו לטיפול בהרשמה וליצירת קשר איתך בנושא הסדנה.</p>
+            <p class="form-privacy" id="registration-privacy">הפרטים ישמשו לטיפול בהרשמה וליצירת קשר איתך בנושא הסדנה.</p>
             <button class="button registration-submit" type="submit">שליחת פרטי הרשמה</button>
           </form>
         </div>
