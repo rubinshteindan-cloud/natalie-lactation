@@ -87,11 +87,11 @@ section[id] { scroll-margin-block-start: 24px; }
   box-shadow: 0 14px 32px #532d4a26;
 }
 .profile-copy { grid-area: copy; }
-.profile-copy h2 { color: #653e5b; margin-block-end: 12px; }
+.profile-copy h2 { inline-size: fit-content; color: #653e5b; margin-block-end: 12px; }
 .profile-copy h2::after {
   content: "";
   display: block;
-  inline-size: 52px;
+  inline-size: 100%;
   block-size: 2px;
   margin-block-start: 14px;
   background: #a36743;

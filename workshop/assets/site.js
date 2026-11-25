@@ -1,8 +1,15 @@
 const workshop = window.workshop;
+const [day, month, year] = workshop.date.split(".").map(Number);
+const workshopDate = new Date(Date.UTC(year, month - 1, day));
+const copy = { ...workshop };
+if (!Number.isNaN(workshopDate.getTime())) {
+  copy.dateShort = new Intl.DateTimeFormat("he-IL", { day: "2-digit", month: "2-digit", timeZone: "UTC" }).format(workshopDate);
+  copy.dateWeekday = new Intl.DateTimeFormat("he-IL", { weekday: "long", timeZone: "UTC" }).format(workshopDate);
+}
 
 document.querySelectorAll("[data-copy]").forEach((element) => {
   const key = element.dataset.copy;
-  element.textContent = workshop[key] || "יעודכן בהמשך";
+  element.textContent = copy[key] || "יעודכן בהמשך";
 });
 
 const contactLinks = {

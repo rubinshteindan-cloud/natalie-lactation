@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="סדנת הכנה להנקה בהיריון עם נטלי בארטפלד, מדריכת הנקה מוסמכת. מפגש מעשי ונעים ב-Zoom.">
+  <meta name="description" content="סדנת הכנה להנקה בהריון עם נטלי בארטפלד, מדריכת הנקה מוסמכת. מפגש מעשי ונעים ב-Zoom.">
   <meta name="theme-color" content="#f8f2e8">
   <title>סדנת הכנה להנקה | נטלי בארטפלד</title>
   <link rel="canonical" href="https://nataliebartfeld.co.il/workshop/">
@@ -11,16 +11,16 @@
   <meta property="og:locale" content="he_IL">
   <meta property="og:url" content="https://nataliebartfeld.co.il/workshop/">
   <meta property="og:title" content="סדנת הכנה להנקה | נטלי בארטפלד">
-  <meta property="og:description" content="מפגש מעשי לנשים בהיריון ב־Zoom. פרטי הסדנה והרשמה באתר.">
-  <meta property="og:image" content="https://nataliebartfeld.co.il/workshop/assets/link-preview.jpg">
+  <meta property="og:description" content="מפגש מעשי לנשים בהריון ב־Zoom. פרטי הסדנה והרשמה באתר.">
+  <meta property="og:image" content="https://nataliebartfeld.co.il/workshop/assets/link-preview.jpg?v=2">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="גלויה עם איור של אמא ותינוק ולוגו NB לצד הכיתוב סדנת הכנה להנקה עם נטלי בארטפלד.">
   <link rel="icon" type="image/webp" href="assets/nb-logo.webp">
-  <link rel="stylesheet" href="assets/style.css?v=5">
-  <script src="workshop.js?v=4" defer></script>
-  <script src="assets/site.js?v=3" defer></script>
+  <link rel="stylesheet" href="assets/style.css?v=6">
+  <script src="workshop.js?v=5" defer></script>
+  <script src="assets/site.js?v=4" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">דילוג לתוכן</a>
@@ -80,7 +80,7 @@
       <div class="details-card">
         <h2 id="details-title">פרטי הסדנה</h2>
         <dl class="facts">
-          <div class="fact fact-date"><dt>תאריך</dt><dd><bdi data-copy="date"></bdi></dd></div>
+          <div class="fact fact-date"><dt data-copy="dateWeekday"></dt><dd><bdi data-copy="dateShort"></bdi></dd></div>
           <div class="fact fact-time"><dt>שעה</dt><dd><bdi data-copy="time"></bdi></dd></div>
           <div class="fact fact-price"><dt>מחיר</dt><dd data-copy="price"></dd></div>
           <div class="fact-meta"><dt>מיקום</dt><dd data-copy="location"></dd></div>
@@ -109,7 +109,7 @@
             <div class="registration-fields">
               <label>שם מלא <input name="full_name" autocomplete="name" maxlength="120" required></label>
               <label>מספר טלפון ל־WhatsApp <input name="phone" type="tel" autocomplete="tel" dir="ltr" maxlength="30" required></label>
-              <label>שבוע היריון <small>(רשות)</small><input name="pregnancy_week" type="number" inputmode="numeric" min="1" max="45" step="1"></label>
+              <label>שבוע הריון <small>(רשות)</small><input name="pregnancy_week" type="number" inputmode="numeric" min="1" max="45" step="1"></label>
             </div>
             <p class="form-privacy" id="registration-privacy">הפרטים ישמשו לטיפול בהרשמה וליצירת קשר איתך ב־WhatsApp בנושא הסדנה.</p>
             <button class="button registration-submit" type="submit">שליחת פרטי הרשמה</button>
